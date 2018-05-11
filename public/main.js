@@ -51,7 +51,6 @@ function calculate(minefield, row, col) {
     for (var newRow = row - 1; newRow < row + 2; newRow++) {
       for (var newCol = col - 1; newCol < col + 2; newCol++) {
         if (newRow != row && newCol != col) {
-      console.log(newRow >= 0 && newCol >= 0 && newRow < minefield.rows.length && newCol < minefield.rows[newRow].cells.length, newRow , newCol, minefield.rows[row].cells.length )
           if (newRow >= 0 && newCol >= 0 && newRow < minefield.rows.length && newCol < minefield.rows[newRow].cells.length){
             
             var cellToCheck = getCellCoordinates(minefield, newRow, newCol);

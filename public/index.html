@@ -15,16 +15,8 @@
 
       <td ng-repeat="cell in row.cells">
 
-        <img ng-if="cell.hasBomb == false" src="./game-graphics/empty.png">
         <img ng-if="cell.hasBomb == true" src="./game-graphics/mine.png">
-        <img ng-if="cell.hasBomb == false && cell.count == 1" src="./game-graphics/number-1.png">
-        <img ng-if="cell.hasBomb == false && cell.count == 2" src="./game-graphics/number-2.png">
-        <img ng-if="cell.hasBomb == false && cell.count == 3" src="./game-graphics/number-3.png">
-        <img ng-if="cell.hasBomb == false && cell.count == 4" src="./game-graphics/number-4.png">
-        <img ng-if="cell.hasBomb == false && cell.count == 5" src="./game-graphics/number-5.png">
-        <img ng-if="cell.hasBomb == false && cell.count == 6" src="./game-graphics/number-6.png">
-        <img ng-if="cell.hasBomb == false && cell.count == 7" src="./game-graphics/number-7.png">
-        <img ng-if="cell.hasBomb == false && cell.count == 8" src="./game-graphics/number-8.png">
+        <img ng-if="cell.hasBomb == false" src="./game-graphics/number-{{cell.count}}.png">
 
         <!-- ACTUAL TD TO USE -->
         <!-- <td ng-repeat="cell in row.cells" ng-click="cell.isCovered = false">
