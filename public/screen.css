@@ -7,3 +7,12 @@ body {
   min-height: 100%;
   font: 16px / 1 sans-serif;
 }
+
+.gameBoard {
+  line-height:0;
+  border-spacing:0;
+}
+
+.gameBoard td {
+  padding:0
+}
