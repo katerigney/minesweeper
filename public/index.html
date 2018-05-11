@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="./screen.css">
   </head>
   <body ng-app="minesweeperApp" ng-controller="mainController">
-    <h1>{{greeting}}</h1>
+    <h1>{{gameTitle}}</h1>
+    <table border="1">
+      <tr ng-repeat="row in minefield.rows">
+          <td ng-repeat="cell in row.cells" ng-click="cell.isCovered = false">
+              {{cell.isCovered}}
+          </td>
+      </tr>
+  </table>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="./main.js" charset="utf-8"></script>
   </body>

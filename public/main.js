@@ -2,24 +2,40 @@ const main = () => {
   document.querySelector('h1').textContent += '?'
 }
 
+const layMinefield = () => {
+  var minefield = {};
+    minefield.rows = [];
+    
+    for(var i = 0; i < 9; i++) {
+        var row = {};
+        row.cells = [];
+        
+        for(var j = 0; j < 9; j++) {
+            var cell = {
+              isCovered: true,
+              hadBomb: false,
+              count: 0
+            };            
+            row.cells.push(cell);
+        }
+        
+        minefield.rows.push(row);
+    }
+    
+    return minefield;
+}
+
+
 angular
-.module("minesweeperApp", [])
-.controller("mainController", ($scope) => {
+  .module("minesweeperApp", [])
+  .controller("mainController", ($scope) => {
 
-  $scope.layMinefield = () => {
-    //for 9x make a row array?
-      //nested for 9x make a cell array?
-        var cell = {
-          hasBomb: false,
-          isRevealed: false,
-          count: 0
-        };
-  }
+    $scope.gameTitle = 'Minesweeper! in Angular'
 
-  //$scope.gameBoard = layMinefield();
-    $scope.greeting = 'Hello, World!'
+    $scope.minefield = layMinefield();
 
-});
+
+  });
 
 
 
