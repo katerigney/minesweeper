@@ -13,7 +13,7 @@ const layMinefield = () => {
         for(var j = 0; j < 9; j++) {
             var cell = {
               isCovered: true,
-              hadBomb: false,
+              hasBomb: false,
               count: 0
             };            
             row.cells.push(cell);
@@ -21,16 +21,30 @@ const layMinefield = () => {
         
         minefield.rows.push(row);
     }
-    
-    return minefield;
+
+  putMine(minefield);
+
+  return minefield;
+
+
 }
 
+function getCellCoordinates(minefield, row, col) {
+  return minefield.rows[row].cells[col];
+}
+
+function putMine(minefield) {
+  var row = Math.round(Math.random() * 8);
+  var col = Math.round(Math.random() * 8);
+  var cell = getCellCoordinates(minefield, row, col);
+  cell.hasBomb = true;
+}
 
 angular
   .module("minesweeperApp", [])
   .controller("mainController", ($scope) => {
 
-    $scope.gameTitle = 'Minesweeper! in Angular'
+    $scope.gameTitle = 'Minesweeper! in Angular!'
 
     $scope.minefield = layMinefield();
 

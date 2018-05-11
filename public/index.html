@@ -10,9 +10,12 @@
     <h1>{{gameTitle}}</h1>
     <table class="gameBoard">
       <tr ng-repeat="row in minefield.rows">
-          <td ng-repeat="cell in row.cells" ng-click="cell.isCovered = false">
-            <img ng-if="cell.isCovered" src="./game-graphics/covered.png">
-            <img ng-if="!cell.isCovered" src="./game-graphics/empty.png">          </td>
+            <td ng-repeat="cell in row.cells" ng-click="cell.isCovered = false">
+              <img ng-if="cell.isCovered" src="./game-graphics/covered.png">
+              <img ng-if="!cell.isCovered && cell.hasBomb == false" src="./game-graphics/empty.png"> 
+              <img ng-if="!cell.isCovered && cell.hasBomb == true" src="./game-graphics/mine.png"> 
+          </td>
+
       </tr>
   </table>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
