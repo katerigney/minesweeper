@@ -38,7 +38,6 @@ function putMines(minefield) {
     var cell = getCellCoordinates(minefield, row, col);
     cell.hasBomb = true;
     //BUG - ON THIRD OR SO REFRESH WILL LOOP 10X BUT WILL ONLY DISPLAY 9 BOMBS
-    console.log(i);
   }
 }
 
@@ -47,17 +46,13 @@ function calculate(minefield, row, col) {
   var currentCell = getCellCoordinates(minefield, row, col);
 
   if (currentCell.hasBomb == false) {
-    //find the cells in the row -1 / +1 and the cells in the col -1 / +1
-    for (var newRow = row - 1; newRow < row + 2; newRow++) {
-      for (var newCol = col - 1; newCol < col + 2; newCol++) {
-        if (newRow != row && newCol != col) {
-          if (newRow >= 0 && newCol >= 0 && newRow < minefield.rows.length && newCol < minefield.rows[newRow].cells.length){
-            
-            var cellToCheck = getCellCoordinates(minefield, newRow, newCol);
-            console.log({m:"checking", newRow, newCol, cellToCheck})
-            if (cellToCheck.hasBomb) {
-              currentCell.count++;
-            }
+    for (var newRow = row - 1; newRow <= row + 1; newRow++) {
+      for (var newCol = col - 1; newCol <= col + 1; newCol++) {
+        if (newRow >= 0 && newCol >= 0 && newRow < minefield.rows.length && newCol < minefield.rows[newRow].cells.length) {
+          var cellToCheck = getCellCoordinates(minefield, newRow, newCol);
+          console.log({ m: "checking", newRow, newCol, cellToCheck })
+          if (cellToCheck.hasBomb) {
+            currentCell.count++;
           }
         }
       }
