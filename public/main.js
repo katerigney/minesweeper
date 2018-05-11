@@ -42,15 +42,17 @@ function putMines(minefield) {
 }
 
 function calculate(minefield, row, col) {
-
   var currentCell = getCellCoordinates(minefield, row, col);
-
   if (currentCell.hasBomb == false) {
+
     for (var newRow = row - 1; newRow <= row + 1; newRow++) {
+
       for (var newCol = col - 1; newCol <= col + 1; newCol++) {
+
         if (newRow >= 0 && newCol >= 0 && newRow < minefield.rows.length && newCol < minefield.rows[newRow].cells.length) {
+
           var cellToCheck = getCellCoordinates(minefield, newRow, newCol);
-          console.log({ m: "checking", newRow, newCol, cellToCheck })
+
           if (cellToCheck.hasBomb) {
             currentCell.count++;
           }
@@ -58,7 +60,6 @@ function calculate(minefield, row, col) {
       }
     }
   }
-  //return currentCell.count;
 }
 
 function getNumbers(minefield) {
@@ -77,6 +78,22 @@ angular
 
     $scope.minefield = layMinefield();
 
+    $scope.clickCount = 0;
+
+    $scope.showCellContent = (cell) => {
+      //cell.isCovered = false;
+      
+      if(cell.hasBomb) {
+          $scope.playerLost = true; 
+          //display all cells hasBomb
+      } else {
+          $scope.clickCount++;
+          console.log($scope.clickCount);
+          if($scope.clickCount == 71) {
+              $scope.playerWon = true;
+          }
+      } 
+  };
 
   });
 

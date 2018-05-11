@@ -10,10 +10,12 @@
 
 <body ng-app="minesweeperApp" ng-controller="mainController">
   <h1>{{gameTitle}}</h1>
+  <h3 ng-show="playerWon">You won!</h3>
+  <h3 ng-show="playerLost">BOOM!</h3>
   <table class="gameBoard">
     <tr ng-repeat="row in minefield.rows">
 
-      <td ng-repeat="cell in row.cells">
+      <td ng-repeat="cell in row.cells" ng-click="showCellContent(cell)">
 
         <img ng-if="cell.hasBomb == true" src="./game-graphics/mine.png">
         <img ng-if="cell.hasBomb == false" src="./game-graphics/number-{{cell.count}}.png">
