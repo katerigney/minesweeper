@@ -80,7 +80,7 @@ const clearEmptyCells = (minefield, row, col) => {
         // }
         if (cellToCheck.count == 0){
           cellToCheck.isCovered = false;
-          setTimeout(clearEmptyCells(minefield, newRow, newCol));
+          clearEmptyCells(minefield, newRow, newCol);
         }
       }
     }
