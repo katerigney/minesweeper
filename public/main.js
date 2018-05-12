@@ -26,13 +26,11 @@ const layMinefield = () => {
   return minefield;
 }
 
-//change function type
-function getCellCoordinates(minefield, row, col) {
+const getCellCoordinates = (minefield, row, col) => {
   return minefield.rows[row].cells[col];
 }
 
-//change function type
-function putMines(minefield) {
+const putMines = (minefield) => {
   for (var i = 0; i < 10; i++) {
     var row = Math.round(Math.random() * 8);
     var col = Math.round(Math.random() * 8);
@@ -43,8 +41,7 @@ function putMines(minefield) {
   }
 }
 
-//change function type
-function calculate(minefield, row, col) {
+const calculate = (minefield, row, col) => {
   var currentCell = getCellCoordinates(minefield, row, col);
   if (currentCell.hasBomb == false) {
 
@@ -65,8 +62,7 @@ function calculate(minefield, row, col) {
   }
 }
 
-//change function type
-function getNumbers(minefield) {
+const getNumbers = (minefield) => {
   for (var i = 0; i < 9; i++) {
     for (var j = 0; j < 9; j++) {
       calculate(minefield, i, j);
@@ -99,7 +95,6 @@ angular
 
     $scope.showCellContent = (cell) => {
       cell.isCovered = false;
-
       if (cell.hasBomb) {
         $scope.playerLost = true;
         var bombs = getBombs($scope.minefield);
