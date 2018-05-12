@@ -63,13 +63,30 @@ const calculate = (minefield, row, col) => {
   }
 }
 
-const clearEmptyCells = (minefield, cell) => {
-  //get cell coordinates
+const clearEmptyCells = (minefield, row, col) => {
+
+  for (var newRow = row - 1; newRow <= row + 1; newRow++) {
+
+    for (var newCol = col - 1; newCol <= col + 1; newCol++) {
+
+      if (newRow >= 0 && newCol >= 0 && newRow < minefield.rows.length && newCol < minefield.rows[newRow].cells.length) {
+
+        var cellToCheck = getCellCoordinates(minefield, newRow, newCol);
+
+        if (cellToCheck.count > 0) {
+          cellToCheck.isCovered = false;
+        } else {
+          clearEmptyCells();
+        }
+      }
+    }
+  }
+
   //check adjacent cells
-    //if 0 
-      //call clearEmptyCells again
-    //if count > 0 
-      // that cell isCovered = false
+  //if 0 
+  //call clearEmptyCells again
+  //if count > 0 
+  // that cell isCovered = false
 }
 
 
@@ -105,7 +122,6 @@ angular
     $scope.clickCount = 0;
 
     $scope.showCellContent = (cell, row, col) => {
-      console.log(cell, row, col);
       cell.isCovered = false;
       if (cell.hasBomb) {
         $scope.playerLost = true;
@@ -116,7 +132,7 @@ angular
       } else {
         $scope.clickCount++;
         if (cell.count == 0) {
-          clearEmptyCells(minefield);
+          clearEmptyCells($scope.minefield, row, col);
         }
         if ($scope.clickCount == 71) {
           $scope.playerWon = true;
