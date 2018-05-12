@@ -13,8 +13,8 @@
   <h3 ng-show="playerWon">You won!</h3>
   <h3 ng-show="playerLost">BOOM!</h3>
   <table class="gameBoard">
-    <tr ng-repeat="row in minefield.rows">
-      <td ng-repeat="cell in row.cells" ng-click="showCellContent(cell)">
+    <tr ng-repeat="row in minefield.rows track by $index">
+      <td ng-repeat="cell in row.cells track by $index" ng-click="showCellContent(cell, $parent.$index, $index)">
         <img ng-if="cell.isCovered" src="./game-graphics/covered.png">
         <img ng-if="!cell.isCovered && cell.hasBomb == true" src="./game-graphics/mine.png">
         <img ng-if="!cell.isCovered && cell.hasBomb == false" src="./game-graphics/number-{{cell.count}}.png">

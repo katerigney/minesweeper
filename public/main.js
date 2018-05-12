@@ -12,10 +12,11 @@ const layMinefield = () => {
 
     for (var j = 0; j < 9; j++) {
       var cell = {
-        // CHANGE IS COVERED BACK TO TRUE!
         isCovered: true,
         hasBomb: false,
-        count: 0
+        count: 0,
+        rowNum: this.row,
+        colNum: row.cells.cell + 1
       };
       row.cells.push(cell);
     }
@@ -62,6 +63,16 @@ const calculate = (minefield, row, col) => {
   }
 }
 
+const clearEmptyCells = (minefield, cell) => {
+  //get cell coordinates
+  //check adjacent cells
+    //if 0 
+      //call clearEmptyCells again
+    //if count > 0 
+      // that cell isCovered = false
+}
+
+
 const getNumbers = (minefield) => {
   for (var i = 0; i < 9; i++) {
     for (var j = 0; j < 9; j++) {
@@ -93,7 +104,8 @@ angular
 
     $scope.clickCount = 0;
 
-    $scope.showCellContent = (cell) => {
+    $scope.showCellContent = (cell, row, col) => {
+      console.log(cell, row, col);
       cell.isCovered = false;
       if (cell.hasBomb) {
         $scope.playerLost = true;
@@ -104,7 +116,7 @@ angular
       } else {
         $scope.clickCount++;
         if (cell.count == 0) {
-          //do something cool with recursion
+          clearEmptyCells(minefield);
         }
         if ($scope.clickCount == 71) {
           $scope.playerWon = true;
@@ -113,10 +125,6 @@ angular
     };
 
   });
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', main)
 
