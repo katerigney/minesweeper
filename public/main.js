@@ -13,7 +13,7 @@ const layMinefield = () => {
     for (var j = 0; j < 9; j++) {
       var cell = {
         // CHANGE IS COVERED BACK TO TRUE!
-        isCovered: false,
+        isCovered: true,
         hasBomb: false,
         count: 0
       };
@@ -23,24 +23,27 @@ const layMinefield = () => {
   }
   putMines(minefield);
   getNumbers(minefield)
-  console.log(minefield);
   return minefield;
 }
 
+//change function type
 function getCellCoordinates(minefield, row, col) {
   return minefield.rows[row].cells[col];
 }
 
+//change function type
 function putMines(minefield) {
   for (var i = 0; i < 10; i++) {
     var row = Math.round(Math.random() * 8);
     var col = Math.round(Math.random() * 8);
     var cell = getCellCoordinates(minefield, row, col);
     cell.hasBomb = true;
-    //BUG - ON THIRD OR SO REFRESH WILL LOOP 10X BUT WILL ONLY DISPLAY 9 BOMBS
+    //is it picking a cell that already has one? I am not taking redundant randoms into account 
+    //BUG - SOMETIMES WILL SOMETIMES WON'T DISPLAY 10 - usually between 8-10
   }
 }
 
+//change function type
 function calculate(minefield, row, col) {
   var currentCell = getCellCoordinates(minefield, row, col);
   if (currentCell.hasBomb == false) {
@@ -62,12 +65,26 @@ function calculate(minefield, row, col) {
   }
 }
 
+//change function type
 function getNumbers(minefield) {
   for (var i = 0; i < 9; i++) {
     for (var j = 0; j < 9; j++) {
       calculate(minefield, i, j);
     }
   }
+}
+
+const getBombs = (minefield) => {
+  var bombs = [];
+  for (var i = 0; i < 9; i++) {
+    for (var j = 0; j < 9; j++) {
+      var cellToCheck = getCellCoordinates(minefield, i, j);
+      if (cellToCheck.hasBomb) {
+        bombs.push(cellToCheck);
+      }
+    }
+  }
+  return bombs;
 }
 
 angular
@@ -81,19 +98,24 @@ angular
     $scope.clickCount = 0;
 
     $scope.showCellContent = (cell) => {
-      //cell.isCovered = false;
-      
-      if(cell.hasBomb) {
-          $scope.playerLost = true; 
-          //display all cells hasBomb
+      cell.isCovered = false;
+
+      if (cell.hasBomb) {
+        $scope.playerLost = true;
+        var bombs = getBombs($scope.minefield);
+        for (var i = 0; i < bombs.length; i++) {
+          bombs[i].isCovered = false;
+        }
       } else {
-          $scope.clickCount++;
-          console.log($scope.clickCount);
-          if($scope.clickCount == 71) {
-              $scope.playerWon = true;
-          }
-      } 
-  };
+        $scope.clickCount++;
+        if (cell.count == 0) {
+          //do something cool with recursion
+        }
+        if ($scope.clickCount == 71) {
+          $scope.playerWon = true;
+        }
+      }
+    };
 
   });
 
