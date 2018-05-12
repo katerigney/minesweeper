@@ -15,8 +15,6 @@ const layMinefield = () => {
         isCovered: true,
         hasBomb: false,
         count: 0,
-        rowNum: this.row,
-        colNum: row.cells.cell + 1
       };
       row.cells.push(cell);
     }
@@ -72,21 +70,20 @@ const clearEmptyCells = (minefield, row, col) => {
       if (newRow >= 0 && newCol >= 0 && newRow < minefield.rows.length && newCol < minefield.rows[newRow].cells.length) {
 
         var cellToCheck = getCellCoordinates(minefield, newRow, newCol);
-
+        
         if (cellToCheck.count > 0) {
           cellToCheck.isCovered = false;
-        } else {
-          clearEmptyCells();
+        } 
+        // THIS WILL AT LEAST CLEAR FIRST ADJACENT CELLS
+        else if (cellToCheck.count == 0){
+          cellToCheck.isCovered = false;
         }
+        // } else {
+        //   clearEmptyCells(minefield, newRow, newCol);
+        // }
       }
     }
   }
-
-  //check adjacent cells
-  //if 0 
-  //call clearEmptyCells again
-  //if count > 0 
-  // that cell isCovered = false
 }
 
 
