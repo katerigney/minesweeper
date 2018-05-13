@@ -12,6 +12,10 @@
   <h1>{{gameTitle}}</h1>
   <h3 ng-show="playerWon">You won!</h3>
   <h3 ng-show="playerLost">BOOM!</h3>
+  <section class="gameBoard-header">
+      <h2 class="timer">{{time}}</h2>
+      <button type="button" ng-click="resetGame()">RESET</button>
+  </section>
   <table class="gameBoard">
     <tr ng-repeat="row in minefield.rows track by $index">
       <td ng-repeat="cell in row.cells track by $index" ng-click="showCellContent(cell, $parent.$index, $index)">

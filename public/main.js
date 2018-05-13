@@ -108,13 +108,12 @@ const clearEmptyCells = (minefield, row, col) => {
     }
   }
 
-  for (var i = 0; i < closeCells.length; i++)
-  {
-      if (closeCells[i].count == 0 || !closeCells[i].hasBomb)
-      {
-          closeCells[i].isCovered = false;
-          clearEmptyCells(closeCells[i])
-      }
+  for (var i = 0; i < closeCells.length; i++) {
+    if (closeCells[i].count == 0 || !closeCells[i].hasBomb) {
+      closeCells[i].isCovered = false;
+      clearEmptyCells(minefield, newRow, newCol)
+      //THIS REVEALS BOMBS -WHAAAT?
+    }
   }
 }
 
@@ -168,6 +167,11 @@ angular
         }
       }
     };
+
+    $scope.resetGame = () => {
+      location.reload();
+      //want a better solution for this...not sure how to call layMinefield here but then $scope.minefield would not have content
+    }
 
   });
 
